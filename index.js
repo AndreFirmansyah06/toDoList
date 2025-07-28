@@ -15,29 +15,26 @@ function addTask() {
 
   if (taskText === "") return;
 
+  input.value = "";
+
+  tampilkanTask();
+}
+
+function tampilkanTask() {
   const hasil = JSON.parse(localStorage.getItem("array")) || [];
-
-  // tasks.forEach((task, index) => {
-  //   const li = document.createElement("li");
-  //   li.textContent = task;
-  //   taskList.appendChild(li);
-  // });
-
-  console.log(hasil)
-
   const taskList = document.getElementById("toDo");
   taskList.innerHTML = "";
 
-  hasil.forEach((task,index) => {
+  hasil.forEach((task, index) => {
     const li = document.createElement("li");
     // console.log(task);
     li.innerHTML = `
-        ${task}
-        <div class="flex gap-15 pl-5">
-        <button onclick="completeTask(this)" class="cursor-pointer "><i class="fa-duotone fa-solid fa-check"></i></button>
-        <button onclick="deleteTask(this)" class="cursor-pointer "><i class="fa-solid fa-trash-can"></i></button>
-        </div>
-      `;
+          ${task}
+          <div class="flex gap-15 pl-5">
+          <button onclick="completeTask(this)" class="cursor-pointer "><i class="fa-duotone fa-solid fa-check"></i></button>
+          <button onclick="deleteTask(this)" class="cursor-pointer "><i class="fa-solid fa-trash-can"></i></button>
+          </div>
+        `;
     li.classList.add(
       "flex",
       "justify-between",
@@ -50,10 +47,7 @@ function addTask() {
     );
 
     document.getElementById("toDo").appendChild(li);
-  })
-
- 
-  input.value = "";
+  });
 }
 
 function completeTask(btn) {
@@ -65,3 +59,6 @@ function deleteTask(btn) {
   const line = btn.closest("li");
   line.remove();
 }
+
+//  document.addEventListener("DOMContentLoaded", tampilkanTask);
+tampilkanTask();
